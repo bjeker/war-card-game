@@ -22,7 +22,8 @@ public class Leaderboard
     void addScore()
     {
         //need access to the newScore to be added
-        // int index = Collections.binarySearch(topScores, newScore);
+        //Collections.binarySearch(topScores, newScore);
+        int index = 0
 
         if (index < 0) {
             // Element not found, calculate the insertion point
@@ -30,7 +31,7 @@ public class Leaderboard
         }
 
         // Insert newElement at the calculated index
-        sortedList.add(index, newElement);
+        // topScores.add(index, newScore);
     }
 
     void removeScore()

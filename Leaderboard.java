@@ -23,7 +23,7 @@ public class Leaderboard
     {
         //need access to the newScore to be added
         //Collections.binarySearch(topScores, newScore);
-        int index = 0
+        int index = 0;
 
         if (index < 0) {
             // Element not found, calculate the insertion point

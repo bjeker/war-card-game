@@ -5,15 +5,19 @@ public class Card
     int value;
     String suit;
 
+    Card(int val, String s)
+    {
+        value = val;
+        suit = s;
+    }
     int getValue()
     {
-        //placeholder
-        return 0;
+        return value;
     }
 
     String getSuit()
     {
-        //placeholder
         return suit;
     }
+
 }

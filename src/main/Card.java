@@ -2,20 +2,20 @@ package main;
 
 public class Card
 {
-    int value;
-    String suit;
+    private int value;
+    private String suit;
 
-    Card(int val, String s)
+    public Card(int val, String s)
     {
         value = val;
         suit = s;
     }
-    int getValue()
+    public int getValue()
     {
         return value;
     }
 
-    String getSuit()
+    public String getSuit()
     {
         return suit;
     }

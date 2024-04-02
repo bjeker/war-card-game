@@ -5,10 +5,10 @@ import java.util.Collections;
 
 public class Deck
 {
-    int size;
-    ArrayList<Card> cards = new ArrayList<>();
+    private int size;
+    private ArrayList<Card> cards = new ArrayList<>();
 
-    Deck()
+    public Deck()
     {
         size = 52;
         for(int i = 2; i < 15; i++)
@@ -23,12 +23,12 @@ public class Deck
             cards.add(spades);
         }
     }
-    void shuffle()
+    public void shuffle()
     {
         Collections.shuffle(cards);
     }
 
-    void deal(Player p1,Player p2)
+    public void deal(Player p1,Player p2)
     {
         ArrayList<Card> playerDeck1 = new ArrayList<>();
         ArrayList<Card> playerDeck2 = new ArrayList<>();

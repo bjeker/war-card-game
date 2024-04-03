@@ -1,30 +1,36 @@
 package main;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
-public class Hand
-{
+public class Hand {
 
-    /*same as in the deck class for cards, see for reference on it*/
-    Vector<Integer> cards = new Vector<Integer>();
+    private ArrayList<Card> cards;
 
-    void hand()
-    {
-
+    public Hand(ArrayList<Card> initialCards) {
+        this.cards = initialCards;
     }
 
-    void addCard()
-    {
-
+    public void addCard(Card card) {
+        cards.add(card);
     }
 
-    void removeCard()
-    {
-
+    public void removeCard(Card card) {
+        cards.remove(card);
     }
 
-    void display()
-    {
-
+    public void display() {
+        System.out.println("Cards in Hand:");
+        for (Card card : cards) {
+            System.out.println(card.toString());
+        }
     }
+
+    public void clear() {
+        cards.clear();
+    }
+
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+    
 }

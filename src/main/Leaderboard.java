@@ -31,7 +31,7 @@ public class Leaderboard
         frame.setVisible(true);
     }
 
-    int getMaxScore()
+    public int getMaxScore()
     {
         if (!topScores.isEmpty()) {
             return topScores.get(0);
@@ -40,7 +40,7 @@ public class Leaderboard
         }
     }
 
-    int getMinScore()
+    public int getMinScore()
     {
         if (!topScores.isEmpty()) {
             return topScores.get(topScores.size() - 1);

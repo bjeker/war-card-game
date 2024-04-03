@@ -7,7 +7,6 @@ public class Player
 {
     private String name;
     private int score;
-    //see card method in Deck class for reference
     private ArrayList<Integer> hand = new ArrayList<Integer>();
 
     //class references

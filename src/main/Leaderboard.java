@@ -9,7 +9,7 @@ public class Leaderboard
 {
     ArrayList<Integer> topScores = new ArrayList<>();
 
-    void display()
+   public void display()
     {
         JFrame frame = new JFrame("Leaderboard");
         frame.setSize(300, 200);
@@ -49,7 +49,7 @@ public class Leaderboard
         }
     }
 
-    void addScore(Player player)
+    public void addScore(Player player)
     {
         int newScore = player.getScore();
         if(topScores.isEmpty()){
@@ -71,7 +71,7 @@ public class Leaderboard
 
     }
 
-    void removeScore()
+    public void removeScore()
     {
         if (!topScores.isEmpty()) {
             topScores.remove(topScores.size() - 1);

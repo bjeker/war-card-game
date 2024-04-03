@@ -2,18 +2,22 @@ package main;
 
 public class Card
 {
-    int value;
-    String suit;
+    private int value;
+    private String suit;
 
-    int getValue()
+    public Card(int val, String s)
     {
-        //placeholder
-        return 0;
+        value = val;
+        suit = s;
+    }
+    public int getValue()
+    {
+        return value;
     }
 
-    String getSuit()
+    public String getSuit()
     {
-        //placeholder
         return suit;
     }
+
 }

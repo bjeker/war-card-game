@@ -16,6 +16,8 @@ public class Player
         name = null;
         score = 0;
         deck = new ArrayList<>();
+        ArrayList<Card> hand = new ArrayList<>();
+        currentHand = new Hand(hand);
     }
 
     //set the initial deck

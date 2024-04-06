@@ -41,7 +41,7 @@ public class Player
         return chosenCard;
     }
 
-    private void setScore(int roundScore)
+    public void setScore(int roundScore)
     {
         //update score based on turn
         score += roundScore;
@@ -53,7 +53,7 @@ public class Player
         return score;
     }
 
-    private void setName(String chosenName)
+    public void setName(String chosenName)
     {
         name = chosenName;
     }

@@ -5,12 +5,11 @@ import java.util.Collections;
 
 public class Deck
 {
-    private int size;
-    private ArrayList<Card> cards = new ArrayList<>();
+    private ArrayList<Card> cards;
 
     public Deck()
     {
-        size = 52;
+        cards = new ArrayList<>();
         for(int i = 2; i < 15; i++)
         {
             Card clubs = new Card(i,"clubs");
@@ -23,6 +22,7 @@ public class Deck
             cards.add(spades);
         }
     }
+
     public void shuffle()
     {
         Collections.shuffle(cards);
@@ -32,11 +32,11 @@ public class Deck
     {
         ArrayList<Card> playerDeck1 = new ArrayList<>();
         ArrayList<Card> playerDeck2 = new ArrayList<>();
-        for(int i = 0; i < size/2; i++)
+        for(int i = 0; i < 26; i++)
         {
             playerDeck1.add(cards.get(i));
         }
-        for(int i = size/2; i < size; i++)
+        for(int i = 26; i < 52; i++)
         {
             playerDeck2.add(cards.get(i));
         }

@@ -2,41 +2,34 @@ package main;
 
 import java.util.ArrayList;
 
-public class Player
-{
+public class Player {
     private String name;
     private int score;
-    private ArrayList<Card> deck;
+    ArrayList<Card> deck;
 
     //class references
     private Hand currentHand;
 
-    public Player()
-    {
+    public Player() {
         name = null;
         score = 0;
-        deck = new ArrayList<>();
         ArrayList<Card> hand = new ArrayList<>();
         currentHand = new Hand(hand);
     }
 
     //set the initial deck
-    public void setDeck(ArrayList<Card> playerDeck)
-    {
+    public void setDeck(ArrayList<Card> playerDeck) {
         deck = playerDeck;
     }
 
-    public void drawCard()
-    {
+    public void drawCard() {
         //add card to the current hand
-        currentHand.addCard(deck.removeFirst());
+        Card newCard = deck.remove(0);
+        currentHand.addCard(newCard);
     }
 
-    public Card playCard()
-    {
-        //passing players current hand to update and display
-        currentHand.display();
-        Card chosenCard = currentHand.getCards().getFirst(); //placeholder for UI selection
+    public Card playCard() {
+        Card chosenCard = currentHand.getCards().get(0); //placeholder for UI selection
         currentHand.removeCard(chosenCard);
         return chosenCard;
     }
@@ -62,4 +55,6 @@ public class Player
     {
         return name;
     }
+
 }
+

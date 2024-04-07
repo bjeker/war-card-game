@@ -58,8 +58,7 @@ public class Leaderboard
             topScores.add(newScore);
             Collections.sort(topScores, Collections.reverseOrder());
         }else if(newScore <= getMinScore()){
-            System.out.print("Score is not greater than the minimun score");
-            return;
+            System.out.print("Score is not greater than the minimum score");
         }else{
             int index = Collections.binarySearch(topScores, newScore);
             if (index < 0) {

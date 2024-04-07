@@ -1,40 +1,43 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
-public class Player
-{
+public class Player {
     private String name;
     private int score;
-    private ArrayList<Integer> hand = new ArrayList<Integer>();
+    ArrayList<Card> deck;
 
     //class references
-    Hand currentHand;
+    private Hand currentHand;
+
+    public Player() {
+        name = null;
+        score = 0;
+        ArrayList<Card> hand = new ArrayList<>();
+        currentHand = new Hand(hand);
+    }
 
     //set the initial deck
-    public void setDeck(ArrayList<Integer> playerDeck)
-    {
-        hand = playerDeck;
+    public void setDeck(ArrayList<Card> playerDeck) {
+        deck = playerDeck;
     }
 
-    public void drawCard()
-    {
+    public void drawCard() {
         //add card to the current hand
-        currentHand.addCard(hand);
+        Card newCard = deck.remove(0);
+        currentHand.addCard(newCard);
     }
 
-    public void playCard()
-    {
-        //passing players current hand to update and display
-        currentHand.display(hand);
-        currentHand.removeCard(hand);
+    public Card playCard() {
+        Card chosenCard = currentHand.getCards().get(0); //placeholder for UI selection
+        currentHand.removeCard(chosenCard);
+        return chosenCard;
     }
 
-    private void setScore(int roundScore)
+    public void setScore(int roundScore)
     {
         //update score based on turn
-        score = roundScore;
+        score += roundScore;
     }
 
     public int getScore()
@@ -43,7 +46,7 @@ public class Player
         return score;
     }
 
-    private void setName(String chosenName)
+    public void setName(String chosenName)
     {
         name = chosenName;
     }
@@ -52,4 +55,6 @@ public class Player
     {
         return name;
     }
+
 }
+

@@ -1,12 +1,18 @@
 package main;
 
+import main.Leaderboard;
+import main.Player;
+import main.Deck;
+import main.Card;
+import main.Hand;
+
 import java.util.Collections;
 
 public class Game {
     private int numPlayers;
     private int roundLimit;
     private Deck initialDeck;
-    private Leaderboard lb;
+    private Leaderboard lb = new Leaderboard();
 
     public Game() {
         numPlayers = 0;
@@ -108,7 +114,7 @@ public class Game {
     }
 
     public void viewLeaderboard() {
-        lb.display();
+        lb.getAllScores();
     }
 
     public static void main(String[] args) {

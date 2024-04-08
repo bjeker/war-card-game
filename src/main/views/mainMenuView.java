@@ -9,6 +9,7 @@ public class mainMenuView {
 
     private JFrame frame;
     private LeaderboardView leaderboardView;
+    private PlayGameView playGameView;
 
     public void displayMainMenu() {
         frame = new JFrame("Main Menu");
@@ -22,8 +23,11 @@ public class mainMenuView {
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Just a pop up until we have the start game Jframe completed
-                JOptionPane.showMessageDialog(frame, "Starting the Game!");
+                // Action to perform when "Play Game" button is clicked
+                if (playGameView == null) {
+                    playGameView = new PlayGameView();
+                }
+                playGameView.display();
             }
         });
 

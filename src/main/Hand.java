@@ -21,7 +21,7 @@ public class Hand {
     public void display() {
         System.out.println("Cards in Hand:");
         for (Card card : cards) {
-            System.out.println(card.toString());
+            card.display();
         }
     }
 

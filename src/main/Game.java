@@ -6,7 +6,7 @@ public class Game {
     private int numPlayers;
     private int roundLimit;
     private Deck initialDeck;
-    private Leaderboard lb;
+    private Leaderboard lb = new Leaderboard();
 
     public Game() {
         numPlayers = 0;
@@ -108,7 +108,7 @@ public class Game {
     }
 
     public void viewLeaderboard() {
-        lb.display();
+        System.out.print(lb.getAllScores());
     }
 
     public static void main(String[] args) {

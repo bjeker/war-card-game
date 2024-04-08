@@ -8,6 +8,7 @@ public class Leaderboard
     ArrayList<Integer> topScores = new ArrayList<>();
 
     public ArrayList<Integer> getAllScores(){
+        Collections.sort(topScores);
         return topScores;
     }
 

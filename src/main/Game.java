@@ -108,7 +108,7 @@ public class Game {
     }
 
     public void viewLeaderboard() {
-        lb.getAllScores();
+        System.out.print(lb.getAllScores());
     }
 
     public static void main(String[] args) {

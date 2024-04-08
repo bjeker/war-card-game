@@ -2,33 +2,13 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.swing.*;
-import java.awt.*;
 
 public class Leaderboard
 {
     ArrayList<Integer> topScores = new ArrayList<>();
 
-   public void display()
-    {
-        JFrame frame = new JFrame("Leaderboard");
-        frame.setSize(300, 200);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        JList<String> leaderboardList = new JList<>(listModel);
-
-        JScrollPane scrollPane = new JScrollPane(leaderboardList);
-        scrollPane.setPreferredSize(new Dimension(250, 150));
-
-        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
-
-        for (Integer score : topScores) {
-            listModel.addElement(String.valueOf(score));
-        }
-
-        frame.setVisible(true);
+    public ArrayList<Integer> getAllScores(){
+        return topScores;
     }
 
     public int getMaxScore()

@@ -106,18 +106,4 @@ public class Game {
             lb.addScore(player2);
         }
     }
-
-    public void viewLeaderboard() {
-        System.out.print(lb.getAllScores());
-    }
-
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.setRoundLimit(150);
-        game.playGame();
-        game.playGame();
-        game.playGame();
-        game.viewLeaderboard();
-    }
-
 }

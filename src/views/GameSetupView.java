@@ -63,7 +63,8 @@ public class GameSetupView {
                 Game newGame = new Game();
                 newGame.setOpponentType(opponentSelection);
                 newGame.setRoundLimit(roundSelection);
-                newGame.display();
+                GamePlayView gamePlayView = new GamePlayView();
+                gamePlayView.display();
             }
         });
 

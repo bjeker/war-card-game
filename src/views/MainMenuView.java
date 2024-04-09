@@ -1,15 +1,15 @@
-package main.views;
+package views;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class mainMenuView {
+public class MainMenuView {
 
     private JFrame frame;
     private LeaderboardView leaderboardView;
-    private PlayGameView playGameView;
+    private GameSetupView gameSetupView;
 
     public void displayMainMenu() {
         frame = new JFrame("Main Menu");
@@ -24,10 +24,11 @@ public class mainMenuView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Action to perform when "Play Game" button is clicked
-                if (playGameView == null) {
-                    playGameView = new PlayGameView();
+                frame.dispose();
+                if (gameSetupView == null) {
+                    gameSetupView = new GameSetupView();
                 }
-                playGameView.display();
+                gameSetupView.display();
             }
         });
 
@@ -50,6 +51,5 @@ public class mainMenuView {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
 }
 

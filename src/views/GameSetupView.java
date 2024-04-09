@@ -23,8 +23,8 @@ public class GameSetupView {
         JPanel mainPanel = new JPanel(new GridLayout(3, 1));
 
         JPanel playerTypePanel = new JPanel(new FlowLayout());
-        JLabel playerTypeLabel = new JLabel("Select Opponent Type: ");
-        playerTypeComboBox = new JComboBox<>(new String[]{"Select","Computer","Player"});
+        JLabel playerTypeLabel = new JLabel("Opponent Type: ");
+        playerTypeComboBox = new JComboBox<>(new String[]{"Select one","Computer","Player"});
         playerTypePanel.add(playerTypeLabel);
         playerTypePanel.add(playerTypeComboBox);
 
@@ -37,8 +37,8 @@ public class GameSetupView {
         });
 
         JPanel roundLimitPanel = new JPanel(new FlowLayout());
-        JLabel roundLimitLabel = new JLabel("Select Round Limit: ");
-        roundLimitComboBox = new JComboBox<>(new String[]{"Select","150","300","Unlimited"});
+        JLabel roundLimitLabel = new JLabel("Round Limit: ");
+        roundLimitComboBox = new JComboBox<>(new String[]{"Select one","150","300","Unlimited"});
 
         roundLimitComboBox.addActionListener(new ActionListener() {
             @Override
@@ -65,6 +65,7 @@ public class GameSetupView {
                 newGame.setRoundLimit(roundSelection);
                 GamePlayView gamePlayView = new GamePlayView();
                 gamePlayView.display();
+                newGame.playGame();
             }
         });
 

@@ -3,23 +3,19 @@ package main;
 import java.util.Collections;
 
 public class Game {
-    private int numPlayers;
-    private int roundLimit;
+    private String opponentType;
+    private String numRounds;
     private Deck initialDeck;
-    private Leaderboard lb = new Leaderboard();
+    private Leaderboard leaderboard = Leaderboard.get();
 
-    public Game() {
-        numPlayers = 0;
-        roundLimit = 0;
-        lb = new Leaderboard();
+    public Game(){}
+
+    public void setOpponentType(String opponent) {
+        opponentType = opponent;
     }
 
-    public void setNumPlayers(int players) {
-        numPlayers = players;
-    }
-
-    public void setRoundLimit(int rounds) {
-        roundLimit = rounds;
+    public void setRoundLimit(String rounds) {
+        numRounds = rounds;
     }
 
     public void playGame() {
@@ -34,8 +30,16 @@ public class Game {
             player1.drawCard();
             player2.drawCard();
         }
+        int roundLimit = 0;
+        if(numRounds.equals("150")) {
+            roundLimit = 150;
+        }
+        else if(numRounds.equals("300")) {
+            roundLimit = 300;
+        }
         int currentRound = 1;
-        while(currentRound <= roundLimit && !player1.deck.isEmpty() && !player2.deck.isEmpty()) {
+        while( (roundLimit == 0 || currentRound <= roundLimit)
+                && !player1.deck.isEmpty() && !player2.deck.isEmpty() ) {
             int p1Value,p2Value,points;
             Card p1Card = player1.playCard();
             Card p2Card = player2.playCard();
@@ -84,7 +88,7 @@ public class Game {
             currentRound += 1;
         }
         System.out.println("\nGame Over");
-        if(currentRound > roundLimit) {
+        if( (roundLimit != 0) && (currentRound > roundLimit) ) {
             System.out.println("Round limit has been reached");
         }
         else if(player1.deck.isEmpty()) {
@@ -99,25 +103,11 @@ public class Game {
         System.out.println(player2.getName() + " has a score of " + p2Score);
         if(p1Score > p2Score){
             System.out.println(player1.getName() + " is the winner!\n");
-            lb.addScore(player1);
+            leaderboard.addScore(player1);
         }
         else if(p2Score > p1Score) {
             System.out.println(player2.getName() + " is the winner!\n");
-            lb.addScore(player2);
+            leaderboard.addScore(player2);
         }
     }
-
-    public void viewLeaderboard() {
-        System.out.print(lb.getAllScores());
-    }
-
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.setRoundLimit(150);
-        game.playGame();
-        game.playGame();
-        game.playGame();
-        game.viewLeaderboard();
-    }
-
 }

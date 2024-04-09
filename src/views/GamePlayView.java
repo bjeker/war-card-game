@@ -9,7 +9,7 @@ public class GamePlayView {
 
     public void display() {
         JFrame gameFrame = new JFrame("War: A Card Game");
-        gameFrame.setSize(900,600);
+        gameFrame.setSize(800,500);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel(new FlowLayout());

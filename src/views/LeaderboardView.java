@@ -1,4 +1,4 @@
-package main.views;
+package views;
 
 import java.util.ArrayList;
 import javax.swing.*;
@@ -6,7 +6,7 @@ import java.awt.*;
 import main.Leaderboard;
 
 public class LeaderboardView {
-    Leaderboard leaderboard = new Leaderboard();
+    private Leaderboard leaderboard = Leaderboard.get();
 
     public void display()
     {
@@ -14,7 +14,6 @@ public class LeaderboardView {
         JFrame frame = new JFrame("Leaderboard");
         frame.setSize(300, 200);
         frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
         JList<String> leaderboardList = new JList<>(listModel);

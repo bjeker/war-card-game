@@ -5,9 +5,16 @@ import java.util.Collections;
 
 public class Leaderboard
 {
-    ArrayList<Integer> topScores = new ArrayList<>();
+    private static Leaderboard self = new Leaderboard();
+
+    private ArrayList<Integer> topScores = new ArrayList<>();
+
+    public static Leaderboard get() {
+        return self;
+    }
 
     public ArrayList<Integer> getAllScores(){
+        Collections.sort(topScores, Collections.reverseOrder());
         return topScores;
     }
 

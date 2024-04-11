@@ -1,33 +1,60 @@
 package main;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
-public class Player
-{
-    String name;
-    int score;
-    //see card method in Deck class for reference
-    Vector<Integer> hand = new Vector<Integer>();
-    Vector<Integer> deck = new Vector<Integer>();
+public class Player {
+    private String name;
+    private int score;
+    ArrayList<Card> deck;
 
-    void drawCard()
-    {
+    //class references
+    private Hand currentHand;
 
+    public Player() {
+        name = null;
+        score = 0;
+        ArrayList<Card> hand = new ArrayList<>();
+        currentHand = new Hand(hand);
     }
 
-    void playCard()
-    {
-
+    //set the initial deck
+    public void setDeck(ArrayList<Card> playerDeck) {
+        deck = playerDeck;
     }
 
-    int getScore()
+    public void drawCard() {
+        //add card to the current hand
+        Card newCard = deck.remove(0);
+        currentHand.addCard(newCard);
+    }
+
+    public Card playCard() {
+        Card chosenCard = currentHand.getCards().get(0); //placeholder for UI selection
+        currentHand.removeCard(chosenCard);
+        return chosenCard;
+    }
+
+    public void setScore(int roundScore)
+    {
+        //update score based on turn
+        score += roundScore;
+    }
+
+    public int getScore()
     {
         //placeholder
-        return 0;
+        return score;
     }
 
-    void updateScore()
+    public void setName(String chosenName)
     {
-
+        name = chosenName;
     }
+
+    public String getName()
+    {
+        return name;
+    }
+
 }
+

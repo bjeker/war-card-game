@@ -7,6 +7,8 @@ public class Game {
     private String numRounds;
     private Deck initialDeck;
     private Leaderboard leaderboard = Leaderboard.get();
+    private int currentRound = 0;
+    private int roundLimit = 0;
 
     public Game(){}
 
@@ -30,14 +32,15 @@ public class Game {
             player1.drawCard();
             player2.drawCard();
         }
-        int roundLimit = 0;
         if(numRounds.equals("150")) {
             roundLimit = 150;
         }
         else if(numRounds.equals("300")) {
             roundLimit = 300;
         }
-        int currentRound = 1;
+        currentRound = 1;
+
+        /*
         while( (roundLimit == 0 || currentRound <= roundLimit)
                 && !player1.deck.isEmpty() && !player2.deck.isEmpty() ) {
             int p1Value,p2Value,points;
@@ -70,7 +73,7 @@ public class Game {
                     player2.deck.add(p1Card);
                     player2.deck.add(p2Card);
                     Collections.shuffle(player2.deck);
-                 }
+                }
                 else {
                     p1Card = player1.playCard();
                     p2Card = player2.playCard();
@@ -88,26 +91,50 @@ public class Game {
             currentRound += 1;
         }
         System.out.println("\nGame Over");
+        */
+    }
+
+    public void endGame()
+    {
+        Player playerOne = new Player();
+        Player playerTwo = new Player();
+
         if( (roundLimit != 0) && (currentRound > roundLimit) ) {
             System.out.println("Round limit has been reached");
         }
-        else if(player1.deck.isEmpty()) {
-            System.out.println(player1.getName() + " is out of cards");
+        else if(playerOne.deck.isEmpty()) {
+            System.out.println(playerOne.getName() + " is out of cards");
         }
-        else if(player2.deck.isEmpty()) {
-            System.out.println(player2.getName() + " is out of cards");
+        else if(playerTwo.deck.isEmpty()) {
+            System.out.println(playerTwo.getName() + " is out of cards");
         }
-        int p1Score = player1.getScore();
-        int p2Score = player2.getScore();
-        System.out.println(player1.getName() + " has a score of " + p1Score);
-        System.out.println(player2.getName() + " has a score of " + p2Score);
+        int p1Score = playerOne.getScore();
+        int p2Score = playerTwo.getScore();
+        System.out.println(playerOne.getName() + " has a score of " + p1Score);
+        System.out.println(playerTwo.getName() + " has a score of " + p2Score);
         if(p1Score > p2Score){
-            System.out.println(player1.getName() + " is the winner!\n");
-            leaderboard.addScore(player1);
+            System.out.println(playerOne.getName() + " is the winner!\n");
+            leaderboard.addScore(playerOne);
         }
         else if(p2Score > p1Score) {
-            System.out.println(player2.getName() + " is the winner!\n");
-            leaderboard.addScore(player2);
+            System.out.println(playerTwo.getName() + " is the winner!\n");
+            leaderboard.addScore(playerTwo);
         }
+    }
+
+    //getters and setters for vars
+    public int getCurrentRound()
+    {
+        return currentRound;
+    }
+
+    public void setCurrentRound()
+    {
+        currentRound += 1;
+    }
+
+    public int getRoundLimit()
+    {
+        return roundLimit;
     }
 }

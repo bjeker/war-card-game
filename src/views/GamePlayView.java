@@ -1,5 +1,9 @@
 package views;
 
+import main.Card;
+import main.Game;
+import main.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,11 +45,41 @@ public class GamePlayView {
                 System.exit(0);
             }
         });
+
+        //play card btn
+        JButton playCardButton = new JButton("Play Card");
+        playCardButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Player player = new Player();
+                Game myGame = new Game();
+                player.playCard();
+                Card pCard = player.playCard();System.out.println("Round " + myGame.getCurrentRound());
+                System.out.print(player.getName() + " card: ");
+                pCard.display();
+                PlayListener();
+            }
+        });
+
         panel.add(playButton);
         panel.add(returnButton);
         panel.add(exitButton);
+        panel.add(playCardButton);
         gameFrame.add(panel);
 
         gameFrame.setVisible(true);
+    }
+
+    //play card btn listener
+    public void PlayListener()
+    {
+        Game myGame = new Game();
+        myGame.setCurrentRound();
+        if (myGame.getCurrentRound() < myGame.getRoundLimit())
+        {
+            myGame.endGame();
+        }
     }
 }

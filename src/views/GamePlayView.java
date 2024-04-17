@@ -77,9 +77,5 @@ public class GamePlayView {
     {
         Game myGame = new Game();
         myGame.setCurrentRound();
-        if (myGame.getCurrentRound() < myGame.getRoundLimit())
-        {
-            myGame.endGame();
-        }
     }
 }

@@ -21,16 +21,16 @@ public class Game {
     }
 
     public void playGame() {
-        Player player1 = new Player();
-        Player player2 = new Player();
-        player1.setName("Player 1");
-        player2.setName("Player 2");
+        Player playerOne = new Player();
+        Player playerTwo = new Player();
+        playerOne.setName("Player 1");
+        playerTwo.setName("Player 2");
         initialDeck = new Deck();
         initialDeck.shuffle();
-        initialDeck.deal(player1,player2);
+        initialDeck.deal(playerOne,playerTwo);
         for(int i = 0; i < 5; i++) {
-            player1.drawCard();
-            player2.drawCard();
+            playerOne.drawCard();
+            playerTwo.drawCard();
         }
         if(numRounds.equals("150")) {
             roundLimit = 150;
@@ -42,62 +42,56 @@ public class Game {
 
         /*
         while( (roundLimit == 0 || currentRound <= roundLimit)
-                && !player1.deck.isEmpty() && !player2.deck.isEmpty() ) {
+                && !playerOne.deck.isEmpty() && !playerTwo.deck.isEmpty() ) {
             int p1Value,p2Value,points;
-            Card p1Card = player1.playCard();
-            Card p2Card = player2.playCard();
+            Card p1Card = playerOne.playCard();
+            Card p2Card = playerTwo.playCard();
             int cardsPlayed = 1;
             boolean winner = false;
             while(!winner) {
                 System.out.println("Round " + currentRound);
-                System.out.print(player1.getName() + " card: ");
+                System.out.print(playerOne.getName() + " card: ");
                 p1Card.display();
-                System.out.print(player2.getName() + " card: ");
+                System.out.print(playerTwo.getName() + " card: ");
                 p2Card.display();
                 p1Value = p1Card.getValue();
                 p2Value = p2Card.getValue();
                 if(p1Value > p2Value) {
                     winner = true;
                     points = p1Value - p2Value;
-                    System.out.println(player1.getName() + " gets " + points + " points");
-                    player1.setScore(points);
-                    player1.deck.add(p1Card);
-                    player1.deck.add(p2Card);
-                    Collections.shuffle(player1.deck);
+                    System.out.println(playerOne.getName() + " gets " + points + " points");
+                    playerOne.setScore(points);
+                    playerOne.deck.add(p1Card);
+                    playerOne.deck.add(p2Card);
+                    Collections.shuffle(playerOne.deck);
                 }
                 else if(p2Value > p1Value) {
                     winner = true;
                     points = p2Value - p1Value;
-                    System.out.println(player2.getName() + " gets " + points + " points");
-                    player2.setScore(points);
-                    player2.deck.add(p1Card);
-                    player2.deck.add(p2Card);
-                    Collections.shuffle(player2.deck);
+                    System.out.println(playerTwo.getName() + " gets " + points + " points");
+                    playerTwo.setScore(points);
+                    playerTwo.deck.add(p1Card);
+                    playerTwo.deck.add(p2Card);
+                    Collections.shuffle(playerTwo.deck);
                 }
                 else {
-                    p1Card = player1.playCard();
-                    p2Card = player2.playCard();
+                    p1Card = playerOne.playCard();
+                    p2Card = playerTwo.playCard();
                     cardsPlayed += 1;
                 }
             }
             for(int i = 0; i < cardsPlayed; i++) {
-                if (!player1.deck.isEmpty()) {
-                    player1.drawCard();
+                if (!playerOne.deck.isEmpty()) {
+                    playerOne.drawCard();
                 }
-                if (!player2.deck.isEmpty()) {
-                    player2.drawCard();
+                if (!playerTwo.deck.isEmpty()) {
+                    playerTwo.drawCard();
                 }
             }
             currentRound += 1;
         }
         System.out.println("\nGame Over");
         */
-    }
-
-    public void endGame()
-    {
-        Player playerOne = new Player();
-        Player playerTwo = new Player();
 
         if( (roundLimit != 0) && (currentRound > roundLimit) ) {
             System.out.println("Round limit has been reached");

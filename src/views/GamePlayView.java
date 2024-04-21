@@ -13,6 +13,7 @@ public class GamePlayView {
 
     public void display() {
         JFrame gameFrame = new JFrame("War: A Card Game");
+        JFrame handFrame = new JFrame("Player 1 Hand");
         gameFrame.setSize(800,500);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -33,6 +34,7 @@ public class GamePlayView {
             public void actionPerformed(ActionEvent e) {
                 // Action to perform when "Return to Main Menu" button is clicked
                 gameFrame.dispose();
+                handFrame.dispose();
                 MainMenuView mainMenuView = new MainMenuView();
                 mainMenuView.displayMainMenu();
             }
@@ -50,7 +52,15 @@ public class GamePlayView {
         panel.add(exitButton);
         gameFrame.add(panel);
 
+        //center game frame above the hand
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int gf_x = (screenSize.width - gameFrame.getWidth()) / 2;
+        int gf_y = 0;
 
+        // Set the frame location
+        gameFrame.setLocation(gf_x, gf_y);
+
+        //below starts funcitonality for the game and hand
         Deck deck = new Deck();
         Player p1 = new Player();
         Player p2 = new Player();
@@ -60,25 +70,24 @@ public class GamePlayView {
         Hand hand1 = new Hand(p1.getDeck());
         Hand hand2 = new Hand(p2.getDeck());
         HandView handView = new HandView(hand1.getCards());
-        JFrame frame = new JFrame("Player 1 Hand");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(handView);
-        frame.pack();
+        //prevents the user from losing access to their hand
+        handFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        handFrame.getContentPane().add(handView);
+        handFrame.pack();
 
-        // Adjust frame size based on the number of cards
-        int cardWidth = 40; // Width of each card
-        int overlap = 10; // Amount of overlap between cards
-        int frameWidth = hand1.getCards().size() * (cardWidth - overlap) + 50; // Add some padding
+        // Adjust handFrame size based on the number of cards
+        int cardWidth = 40;
+        int overlap = 20; // Amount of overlap between cards
+        int frameWidth = hand1.getCards().size() * (cardWidth-3); // Add some padding
         int frameHeight = 100; // Set initial height
-        frame.setSize(frameWidth, frameHeight);
+        handFrame.setSize(frameWidth, frameHeight);
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screenSize.width - frame.getWidth()) / 2; // Center horizontally
-        int y = (int) (screenSize.height * 0.75); // Position below the game JFrame
-        frame.setLocation(x, y);
+        int h_x = (screenSize.width - handFrame.getWidth()) / 2; // Center horizontally
+        int h_y = gameFrame.getHeight() + 30; // Position below the game JFrame
+        handFrame.setLocation(h_x, h_y);
 
-        frame.setVisible(true);
-
+        handFrame.setVisible(true);
+        //hand functionality finished
 
         gameFrame.setVisible(true);
     }

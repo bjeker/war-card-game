@@ -44,18 +44,13 @@ public class HandView extends JPanel {
         if (value >= 2 && value <= 10) {
             return String.valueOf(value);
         } else {
-            switch (value) {
-                case 11:
-                    return "J";
-                case 12:
-                    return "Q";
-                case 13:
-                    return "K";
-                case 14:
-                    return "A";
-                default:
-                    return "";
-            }
+            return switch (value) {
+                case 11 -> "J";
+                case 12 -> "Q";
+                case 13 -> "K";
+                case 14 -> "A";
+                default -> "";
+            };
         }
     }
 

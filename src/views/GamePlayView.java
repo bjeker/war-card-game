@@ -54,14 +54,29 @@ public class GamePlayView {
         Deck deck = new Deck();
         Player p1 = new Player();
         Player p2 = new Player();
+        deck.shuffle();
         deck.deal(p1,p2);
 
-        Hand hand = new Hand(p1.getDeck());
-        HandView handView = new HandView(hand.getCards());
+        Hand hand1 = new Hand(p1.getDeck());
+        Hand hand2 = new Hand(p2.getDeck());
+        HandView handView = new HandView(hand1.getCards());
         JFrame frame = new JFrame("Player 1 Hand");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(handView);
         frame.pack();
+
+        // Adjust frame size based on the number of cards
+        int cardWidth = 40; // Width of each card
+        int overlap = 10; // Amount of overlap between cards
+        int frameWidth = hand1.getCards().size() * (cardWidth - overlap) + 50; // Add some padding
+        int frameHeight = 100; // Set initial height
+        frame.setSize(frameWidth, frameHeight);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - frame.getWidth()) / 2; // Center horizontally
+        int y = (int) (screenSize.height * 0.75); // Position below the game JFrame
+        frame.setLocation(x, y);
+
         frame.setVisible(true);
 
 

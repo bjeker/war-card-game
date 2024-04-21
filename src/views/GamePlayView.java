@@ -1,5 +1,9 @@
 package views;
 
+import main.Deck;
+import main.Hand;
+import main.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -45,6 +49,21 @@ public class GamePlayView {
         panel.add(returnButton);
         panel.add(exitButton);
         gameFrame.add(panel);
+
+
+        Deck deck = new Deck();
+        Player p1 = new Player();
+        Player p2 = new Player();
+        deck.deal(p1,p2);
+
+        Hand hand = new Hand(p1.getDeck());
+        HandView handView = new HandView(hand.getCards());
+        JFrame frame = new JFrame("Player 1 Hand");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(handView);
+        frame.pack();
+        frame.setVisible(true);
+
 
         gameFrame.setVisible(true);
     }

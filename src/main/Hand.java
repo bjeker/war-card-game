@@ -18,13 +18,6 @@ public class Hand {
         cards.remove(card);
     }
 
-    public void display() {
-        System.out.println("Cards in Hand:");
-        for (Card card : cards) {
-            card.display();
-        }
-    }
-
     public void clear() {
         cards.clear();
     }

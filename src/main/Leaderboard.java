@@ -41,7 +41,7 @@ public class Leaderboard
         int newScore = player.getScore();
         if(topScores.isEmpty()){
             topScores.add(0, newScore);
-        }else if(newScore <= getMinScore() && topScores.size() < 10){
+        }else if(topScores.size() < 10){
             topScores.add(newScore);
             Collections.sort(topScores, Collections.reverseOrder());
         }else if(newScore <= getMinScore()){
@@ -49,10 +49,10 @@ public class Leaderboard
         }else{
             int index = Collections.binarySearch(topScores, newScore);
             if (index < 0) {
-                // Element not found, calculate the insertion point
                 index = -(index + 1);
             }
             topScores.add(index, newScore);
+            removeScore();
         }
 
     }

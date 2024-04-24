@@ -18,11 +18,10 @@ public class HandView extends JPanel {
         super.paintComponent(g);
         int cardWidth = 40; // Width of each card
         int overlap = 10; // Amount of overlap between cards
-        int startX = (getWidth() - cards.size() * (cardWidth - overlap)) / 2; // Starting x-coordinate for drawing cards
 
-        for (int i = 0; i < cards.size(); i++) {
+        for (int i = 0; i < 5; i++) {
             Card card = cards.get(i);
-            drawCard(g, startX + i * (cardWidth - overlap), getHeight() / 2, card);
+            drawCard(g, 5 + i * (cardWidth - overlap), 5, card);
         }
     }
 

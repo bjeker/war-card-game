@@ -86,7 +86,7 @@ public class GamePlayView {
         // Adjust handFrame size based on the number of cards
         int cardWidth = 40;
         int overlap = 20; // Amount of overlap between cards
-        int frameWidth = hand1.getCards().size() * (cardWidth-3); // Add some padding
+        int frameWidth = hand1.getCards().size()*7; // Add some padding
         int frameHeight = 100; // Set initial height
         handFrame1.setSize(frameWidth, frameHeight);
         handFrame2.setSize(frameWidth, frameHeight);

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class GameSetupView {
     private JFrame frame;
@@ -30,7 +31,7 @@ public class GameSetupView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Action to perform when opponent type selection is made
-                opponentSelection = (String)playerTypeComboBox.getSelectedItem();
+                opponentSelection = (String)playerTypeComboBox.getSelectedItem();;
             }
         });
 
@@ -42,7 +43,7 @@ public class GameSetupView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Action to perform when round limit selection is made
-                roundSelection = (String)roundLimitComboBox.getSelectedItem();
+                roundSelection = (String)roundLimitComboBox.getSelectedItem();;
             }
         });
 
@@ -57,6 +58,13 @@ public class GameSetupView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Action to perform when "Start Game" button is clicked
+
+                // Handle an invalid option
+                if (opponentSelection == null || roundSelection == null)
+                {
+                    return;
+                }
+
                 frame.dispose();
                 GamePlayView gamePlayView = new GamePlayView();
                 gamePlayView.display(opponentSelection, roundSelection);

@@ -1,30 +1,35 @@
 package views;
 
 import main.Card;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HandView extends JPanel {
     private ArrayList<Card> cards;
+    private HashMap<Card,Rectangle> cardPositions;
 
     public HandView(ArrayList<Card> cards) {
         this.cards = cards;
         setPreferredSize(new Dimension(200, 100)); // Set preferred size for the panel
+        cardPositions = new HashMap<>();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         int cardWidth = 40; // Width of each card
-        int overlap = 10; // Amount of overlap between cards
 
         for (int i = 0; i < 5; i++) {
-            Card card = cards.get(i);
-            drawCard(g, 5 + i * (cardWidth - overlap), 5, card);
+            if(cards.get(i) != null){
+                Card card = cards.get(i);
+                drawCard(g, 5 + i * cardWidth, 5, card);
+            }
+
         }
     }
-
 
     private void drawCard(Graphics g, int x, int y, Card card) {
         g.setColor(Color.WHITE);
@@ -36,8 +41,10 @@ public class HandView extends JPanel {
 
         // Draw card suit below the value
         g.drawString(formatCardSuit(card.getSuit()), x + 5, y + 35);
-    }
 
+        Rectangle bounds = new Rectangle(x, y, 40, 60);
+        cardPositions.put(card, bounds);
+    }
 
     private String formatCardValue(int value) {
         if (value >= 2 && value <= 10) {
@@ -61,5 +68,9 @@ public class HandView extends JPanel {
             case "spades" -> "♠";
             default -> "";
         };
+    }
+
+    public HashMap<Card, Rectangle> getCardPositions() {
+        return cardPositions;
     }
 }

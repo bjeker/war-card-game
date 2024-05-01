@@ -155,6 +155,15 @@ public class GamePlayView {
         handFrame2.setVisible(true);
         //hand functionality finished
 
+        //game over
+        //need to add round limit to this condition
+        if(p2.getDeck().isEmpty() || p1.getDeck().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Game Over", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            gameFrame.dispose();
+            MainMenuView mainMenuView = new MainMenuView();
+            mainMenuView.displayMainMenu();
+        }
+
         gameFrame.setVisible(true);
     }
 

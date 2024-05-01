@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.Map;
 
 public class GamePlayView {
+    JFrame gameFrame = new JFrame("War: A Card Game");
+    JFrame handFrame1 = new JFrame("Player 1 Hand");
+    JFrame handFrame2 = new JFrame("Player 2 Hand");
 
     private String opponentType;
     private int roundLimit;
@@ -27,9 +30,8 @@ public class GamePlayView {
     private ArrayList<Card> p2Pile = new ArrayList<>();
 
     public void display(String opponent, String rounds) {
-        JFrame gameFrame = new JFrame("War: A Card Game");
-        JFrame handFrame1 = new JFrame("Player 1 Hand");
-        JFrame handFrame2 = new JFrame("Player 2 Hand");
+
+
         gameFrame.setSize(800,400);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -242,7 +244,17 @@ public class GamePlayView {
                 leaderboard.addScore(p2);
             }
             String message = scores + "\n" + winner;
+
             JOptionPane.showMessageDialog(null, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            gameFrame.dispose();
+            handFrame1.dispose();
+            handFrame2.dispose();
+            MainMenuView mainMenuView = new MainMenuView();
+            mainMenuView.displayMainMenu();
+
+
+
+
         }
     }
 

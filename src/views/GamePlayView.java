@@ -40,6 +40,8 @@ public class GamePlayView {
             public void actionPerformed(ActionEvent e) {
                 // Action to perform when "Play Again" button is clicked
                 gameFrame.dispose();
+                handFrame1.dispose();
+                handFrame2.dispose();
                 GameSetupView gameSetupView = new GameSetupView();
                 gameSetupView.display();
             }
@@ -107,10 +109,12 @@ public class GamePlayView {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Point pointClicked = e.getPoint();
-                for(Map.Entry<Card,Rectangle> element : handView.getCardPositions().entrySet()) {
-                    if(element.getValue().contains(pointClicked)) {
-                        cardSelected = element.getKey();
-                    }
+                // Calculate the index of the clicked card based on the x-coordinate of the click
+                int indexClicked = (int) (pointClicked.getX() / 40); // since card width is 40
+                // Ensure the index is within the bounds of the hand
+                if (indexClicked >= 0 && indexClicked < p1.getHand().size()) {
+                    cardSelected = p1.getHand().get(indexClicked);
+                    System.out.println("Clicked on card at index " + indexClicked + ": " + cardSelected);
                 }
                 Card p1Card = cardSelected;
                 Card p2Card = p2.getHand().get(0);
@@ -123,7 +127,9 @@ public class GamePlayView {
                 p2.playCard(p2Card);
                 playRound(p1Card, p2Card);
                 handView.repaint();
+                handFrame1.repaint();
                 handView2.repaint();
+                handFrame2.repaint();
             }
         });
 

@@ -23,8 +23,11 @@ public class HandView extends JPanel {
         int cardWidth = 40; // Width of each card
 
         for (int i = 0; i < 5; i++) {
-            Card card = cards.get(i);
-            drawCard(g, 5 + i * cardWidth, 5, card);
+            if(cards.get(i) != null){
+                Card card = cards.get(i);
+                drawCard(g, 5 + i * cardWidth, 5, card);
+            }
+
         }
     }
 

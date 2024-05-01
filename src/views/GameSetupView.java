@@ -31,7 +31,7 @@ public class GameSetupView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Action to perform when opponent type selection is made
-                opponentSelection = (String)playerTypeComboBox.getSelectedItem();;
+                opponentSelection = (String)playerTypeComboBox.getSelectedItem();
             }
         });
 
@@ -43,7 +43,7 @@ public class GameSetupView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Action to perform when round limit selection is made
-                roundSelection = (String)roundLimitComboBox.getSelectedItem();;
+                roundSelection = (String)roundLimitComboBox.getSelectedItem();
             }
         });
 

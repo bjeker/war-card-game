@@ -16,23 +16,18 @@ public class Card {
         return suit;
     }
 
-    public void display() {
+    public String display() {
         switch(value) {
             case 11:
-                System.out.println("Jack of " + suit);
-                break;
+                return "Jack of " + suit;
             case 12:
-                System.out.println("Queen of " + suit);
-                break;
+                return "Queen of " + suit;
             case 13:
-                System.out.println("King of " + suit);
-                break;
+                return "King of " + suit;
             case 14:
-                System.out.println("Ace of " + suit);
-                break;
+                return "Ace of " + suit;
             default:
-                System.out.println(value + " of " + suit);
-                break;
+                return value + " of " + suit;
         }
     }
 

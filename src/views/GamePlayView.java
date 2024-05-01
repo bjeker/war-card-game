@@ -102,8 +102,10 @@ public class GamePlayView {
 
         //game over
         //need to add round limit to this condition
+        //Calculate winner and display p1 or p2 winner with the score
+        String message = "";
         if(p2.getDeck().isEmpty() || p1.getDeck().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Game Over", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
             gameFrame.dispose();
             MainMenuView mainMenuView = new MainMenuView();
             mainMenuView.displayMainMenu();

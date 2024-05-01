@@ -55,6 +55,6 @@ public class Player {
     {
         return name;
     }
-
+    public ArrayList<Card> getDeck() {return deck; };
 }
 

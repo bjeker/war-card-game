@@ -1,7 +1,5 @@
 package views;
 
-import main.Game;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -60,12 +58,8 @@ public class GameSetupView {
             public void actionPerformed(ActionEvent e) {
                 // Action to perform when "Start Game" button is clicked
                 frame.dispose();
-                Game newGame = new Game();
-                newGame.setOpponentType(opponentSelection);
-                newGame.setRoundLimit(roundSelection);
                 GamePlayView gamePlayView = new GamePlayView();
-                gamePlayView.display();
-                newGame.playGame();
+                gamePlayView.display(opponentSelection, roundSelection);
             }
         });
 

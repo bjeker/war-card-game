@@ -1,21 +1,36 @@
 package views;
 
-import main.Deck;
-import main.Hand;
-import main.Player;
+import main.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
 
 public class GamePlayView {
 
-    public void display() {
+    private String opponentType;
+    private int roundLimit;
+    private Deck initialDeck;
+    private Leaderboard leaderboard = Leaderboard.get();
+    private Player p1,p2;
+    private HandView handView,handView2;
+    private Card cardSelected;
+    private int currentRound;
+    private boolean war;
+    private ArrayList<Card> p1Pile = new ArrayList<>();
+    private ArrayList<Card> p2Pile = new ArrayList<>();
+
+    public void display(String opponent, String rounds) {
         JFrame gameFrame = new JFrame("War: A Card Game");
         JFrame handFrame1 = new JFrame("Player 1 Hand");
         JFrame handFrame2 = new JFrame("Player 2 Hand");
-        gameFrame.setSize(800,500);
+        gameFrame.setSize(800,400);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel(new FlowLayout());
@@ -62,17 +77,56 @@ public class GamePlayView {
         // Set the frame location
         gameFrame.setLocation(gf_x, gf_y);
 
-        //below starts funcitonality for the game and hand
-        Deck deck = new Deck();
-        Player p1 = new Player();
-        Player p2 = new Player();
-        deck.shuffle();
-        deck.deal(p1,p2);
+        //below starts functionality for the game and hand
+        initialDeck = new Deck();
+        p1 = new Player();
+        p2 = new Player();
+        p1.setName("Player 1");
+        p2.setName("Player 2");
+        opponentType = opponent;
+        if(rounds.equals("150")) {
+            roundLimit = 150;
+        }
+        else if(rounds.equals("300")) {
+            roundLimit = 300;
+        }
+        else {
+            roundLimit = -1;
+        }
+        initialDeck.shuffle();
+        initialDeck.deal(p1, p2);
+        for(int i = 0; i < 5; i++) {
+            p1.drawCard();
+            p2.drawCard();
+        }
+        currentRound = 1;
 
-        Hand hand1 = new Hand(p1.getDeck());
-        Hand hand2 = new Hand(p2.getDeck());
-        HandView handView = new HandView(hand1.getCards());
-        HandView handView2 = new HandView(hand2.getCards());
+        handView = new HandView(p1.getHand());
+        handView2 = new HandView(p2.getHand());
+        handView.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Point pointClicked = e.getPoint();
+                for(Map.Entry<Card,Rectangle> element : handView.getCardPositions().entrySet()) {
+                    if(element.getValue().contains(pointClicked)) {
+                        cardSelected = element.getKey();
+                    }
+                }
+                Card p1Card = cardSelected;
+                Card p2Card = p2.getHand().get(0);
+                for(Card card : p2.getHand()) {
+                    if(card.getValue() > p2Card.getValue()) {
+                        p2Card = card;
+                    }
+                }
+                p1.playCard(cardSelected);
+                p2.playCard(p2Card);
+                playRound(p1Card, p2Card);
+                handView.repaint();
+                handView2.repaint();
+            }
+        });
+
         //prevents the user from losing access to their hand
         handFrame1.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         handFrame2.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -83,18 +137,15 @@ public class GamePlayView {
         handFrame1.pack();
         handFrame2.pack();
 
-        // Adjust handFrame size based on the number of cards
-        int cardWidth = 40;
-        int overlap = 20; // Amount of overlap between cards
-        int frameWidth = hand1.getCards().size()*9; // Add some padding
-        int frameHeight = 100; // Set initial height
+        int frameWidth = 260; // Set initial width
+        int frameHeight = 120; // Set initial height
         handFrame1.setSize(frameWidth, frameHeight);
         handFrame2.setSize(frameWidth, frameHeight);
 
         int h_x = (screenSize.width - handFrame1.getWidth()) / 2; // Center horizontally
-        int h_y = gameFrame.getHeight() + 30; // Position below the game JFrame
+        int h_y = gameFrame.getHeight() + 20; // Position below the game JFrame
         handFrame1.setLocation(h_x, h_y+gf_y);
-        handFrame2.setLocation(h_x, 0);
+        handFrame2.setLocation(h_x, 10);
 
         handFrame1.setVisible(true);
         handFrame2.setVisible(true);
@@ -102,4 +153,82 @@ public class GamePlayView {
 
         gameFrame.setVisible(true);
     }
+
+    public void playRound(Card p1Card, Card p2Card) {
+        p1Pile.add(p1Card);
+        p2Pile.add(p2Card);
+        int p1Value, p2Value, points = 0;
+        String title = "Round " + currentRound;
+        String cardsChosen = p1.getName() + " card: " + p1Card.display() + "\n"
+                + p2.getName() + " card: " + p2Card.display();
+        p1Value = p1Card.getValue();
+        p2Value = p2Card.getValue();
+        if (p1Value > p2Value) {
+            war = false;
+            points = p1Value - p2Value;
+            String pointsWon = p1.getName() + " gets " + points + " points";
+            String message = cardsChosen + "\n" + pointsWon;
+            JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+            p1.setScore(points);
+            p1.deck.addAll(p1Pile);
+            p1Pile.clear();
+            p1.deck.addAll(p2Pile);
+            p2Pile.clear();
+            Collections.shuffle(p1.deck);
+        } else if (p2Value > p1Value) {
+            war = false;
+            points = p2Value - p1Value;
+            String pointsWon = p2.getName() + " gets " + points + " points";
+            String message = cardsChosen + "\n" + pointsWon;
+            JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+            p2.setScore(points);
+            p2.deck.addAll(p1Pile);
+            p1Pile.clear();
+            p2.deck.addAll(p2Pile);
+            p2Pile.clear();
+            Collections.shuffle(p2.deck);
+        } else {
+            war = true;
+            String message = cardsChosen + "\n" + "It's war!" + "\nChoose another card to play";
+            JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+            p1Pile.add(p1Card);
+            p2Pile.add(p2Card);
+            for (int i = 0; i < 3; i++) {
+                if (!p1.deck.isEmpty()) {
+                    p1Pile.add(p1.deck.remove(0));
+                }
+                if (!p2.deck.isEmpty()) {
+                    p2Pile.add(p2.deck.remove(0));
+                }
+            }
+        }
+        if (!p1.deck.isEmpty()) {
+            p1.drawCard();
+        }
+        if (!p2.deck.isEmpty()) {
+            p2.drawCard();
+        }
+        if (!war) {
+            currentRound += 1;
+        }
+        //game over
+        //Calculate winner and display p1 or p2 winner with the score
+        if((roundLimit != -1 && currentRound > roundLimit) || p2.getDeck().isEmpty() || p1.getDeck().isEmpty()) {
+            int p1Score = p1.getScore();
+            int p2Score = p2.getScore();
+            String scores = p1.getName() + " has a score of " + p1Score + "\n" + p2.getName() + " has a score of " + p2Score;
+            String winner = "";
+            if(p1Score > p2Score){
+                winner = p1.getName() + " is the winner!";
+                leaderboard.addScore(p1);
+            }
+            else if(p2Score > p1Score) {
+                winner = p2.getName() + " is the winner!";
+                leaderboard.addScore(p2);
+            }
+            String message = scores + "\n" + winner;
+            JOptionPane.showMessageDialog(null, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
 }

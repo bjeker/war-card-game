@@ -127,9 +127,7 @@ public class GamePlayView {
                 p2.playCard(p2Card);
                 playRound(p1Card, p2Card);
                 handView.repaint();
-                handFrame1.repaint();
                 handView2.repaint();
-                handFrame2.repaint();
             }
         });
 

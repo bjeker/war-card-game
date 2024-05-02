@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.Map;
 
 public class GamePlayView {
+    JFrame gameFrame = new JFrame("War: A Card Game");
+    JFrame handFrame1 = new JFrame("Player 1 Hand");
+    JFrame handFrame2 = new JFrame("Player 2 Hand");
 
     private String opponentType;
     private int roundLimit;
@@ -27,9 +30,8 @@ public class GamePlayView {
     private ArrayList<Card> p2Pile = new ArrayList<>();
 
     public void display(String opponent, String rounds) {
-        JFrame gameFrame = new JFrame("War: A Card Game");
-        JFrame handFrame1 = new JFrame("Player 1 Hand");
-        JFrame handFrame2 = new JFrame("Player 2 Hand");
+
+
         gameFrame.setSize(800,400);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JLabel scoreP1 = new JLabel();
@@ -121,7 +123,6 @@ public class GamePlayView {
                 // Ensure the index is within the bounds of the hand
                 if (indexClicked >= 0 && indexClicked < p1.getHand().size()) {
                     cardSelected = p1.getHand().get(indexClicked);
-                    System.out.println("Clicked on card at index " + indexClicked + ": " + cardSelected);
                 }
                 Card p1Card = cardSelected;
                 Card p2Card = p2.getHand().get(0);
@@ -134,11 +135,7 @@ public class GamePlayView {
                 p2.playCard(p2Card);
                 playRound(p1Card, p2Card);
                 handView.repaint();
-                handFrame1.repaint();
                 handView2.repaint();
-                handFrame2.repaint();
-                scoreP1.setText(p1.getName() + " score: " + p1.getScore());
-                scoreP2.setText(p2.getName() + " score: " + p2.getScore());
             }
         });
 
@@ -165,6 +162,17 @@ public class GamePlayView {
         handFrame1.setVisible(true);
         handFrame2.setVisible(true);
         //hand functionality finished
+
+        //game over
+        //need to add round limit to this condition
+        //Calculate winner and display p1 or p2 winner with the score
+        String message = "";
+        if(p2.getDeck().isEmpty() || p1.getDeck().isEmpty()) {
+            JOptionPane.showMessageDialog(null, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            gameFrame.dispose();
+            MainMenuView mainMenuView = new MainMenuView();
+            mainMenuView.displayMainMenu();
+        }
 
         gameFrame.setVisible(true);
     }
@@ -243,7 +251,17 @@ public class GamePlayView {
             }
 
             String message = scores + "\n" + winner;
+
             JOptionPane.showMessageDialog(null, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            gameFrame.dispose();
+            handFrame1.dispose();
+            handFrame2.dispose();
+            MainMenuView mainMenuView = new MainMenuView();
+            mainMenuView.displayMainMenu();
+
+
+
+
         }
     }
 

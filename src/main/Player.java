@@ -5,9 +5,7 @@ import java.util.ArrayList;
 public class Player {
     private String name;
     private int score;
-    ArrayList<Card> deck;
-
-    //class references
+    public ArrayList<Card> deck;
     private Hand currentHand;
 
     public Player() {
@@ -28,10 +26,8 @@ public class Player {
         currentHand.addCard(newCard);
     }
 
-    public Card playCard() {
-        Card chosenCard = currentHand.getCards().get(0); //placeholder for UI selection
+    public void playCard(Card chosenCard) {
         currentHand.removeCard(chosenCard);
-        return chosenCard;
     }
 
     public void setScore(int roundScore)
@@ -55,6 +51,12 @@ public class Player {
     {
         return name;
     }
+
     public ArrayList<Card> getDeck() {return deck; };
+
+    public ArrayList<Card> getHand() {
+        return currentHand.getCards();
+    }
+
 }
 

@@ -2,6 +2,9 @@ package test;
 
 //import org.junit.Test;
 
+/**
+ * Test for handling the hand.
+ */
 public class HandTest {
 //    @Test
 //    public void testAddCard() {

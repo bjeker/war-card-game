@@ -3,9 +3,15 @@ package main;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Deck of cards used
+ */
 public class Deck {
     private ArrayList<Card> cards;
 
+    /**
+     * Add cards to the deck for each suit
+     */
     public Deck() {
         cards = new ArrayList<>();
         for(int i = 2; i < 15; i++) {
@@ -20,10 +26,19 @@ public class Deck {
         }
     }
 
+    /**
+     * Shuffle the deck of cards
+     */
     public void shuffle() {
         Collections.shuffle(cards);
     }
 
+    /**
+     * Deal the deck of cards to players
+     *
+     * @param p1 Player 1
+     * @param p2 Player 2
+     */
     public void deal(Player p1,Player p2) {
         ArrayList<Card> playerDeck1 = new ArrayList<>();
         ArrayList<Card> playerDeck2 = new ArrayList<>();

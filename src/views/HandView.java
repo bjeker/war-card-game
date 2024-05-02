@@ -10,11 +10,18 @@ import java.util.HashMap;
 public class HandView extends JPanel {
     private ArrayList<Card> cards;
     private HashMap<Card,Rectangle> cardPositions;
+    private boolean showBack;
 
     public HandView(ArrayList<Card> cards) {
         this.cards = cards;
         setPreferredSize(new Dimension(200, 100)); // Set preferred size for the panel
         cardPositions = new HashMap<>();
+        showBack = false; // By default, show the card value
+    }
+
+    public void setShowBack(boolean showBack) {
+        this.showBack = showBack;
+        repaint(); // Repaint the hand view with the updated option
     }
 
     @Override
@@ -24,12 +31,26 @@ public class HandView extends JPanel {
 
         for (int i = 0; i < 5; i++) {
             if(cards.get(i) != null){
-                Card card = cards.get(i);
-                drawCard(g, 5 + i * cardWidth, 5, card);
+                if (showBack) {
+                    // Draw lines on the back of each card to represent individual cards
+                    drawLinesOnBack(g, 5 + i * cardWidth, 5);
+                } else {
+                    // Draw the card value
+                    drawCard(g, 5 + i * cardWidth, 5, cards.get(i));
+                }
             }
-
         }
     }
+
+    private void drawLinesOnBack(Graphics g, int x, int y) {
+        g.setColor(Color.RED);
+        g.fillRect(x, y, 40, 60); // Draw rectangle as card background
+        g.setColor(Color.WHITE);
+        // Draw lines to represent individual cards
+        g.drawLine(x + 5, y + 5, x + 5, y + 55); // Left line
+        g.drawLine(x + 35, y + 5, x + 35, y + 55); // Right line
+    }
+
 
     private void drawCard(Graphics g, int x, int y, Card card) {
         g.setColor(Color.WHITE);

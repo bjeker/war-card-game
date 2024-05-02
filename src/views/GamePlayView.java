@@ -114,6 +114,7 @@ public class GamePlayView {
 
         handView = new HandView(p1.getHand());
         handView2 = new HandView(p2.getHand());
+        handView2.setShowBack(true);
         handView.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

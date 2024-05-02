@@ -6,6 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+/**
+ * <p>
+ * Main menu.
+ * </p>
+ * Play Game and Leaderboard options.
+ * Game setup choices for opponent and round.
+ */
 public class GameSetupView {
     private JFrame frame;
     private JComboBox<String> playerTypeComboBox;

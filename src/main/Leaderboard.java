@@ -3,6 +3,9 @@ package main;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Leaderboard for top player scores.
+ */
 public class Leaderboard
 {
     private static Leaderboard self = new Leaderboard();
@@ -13,11 +16,21 @@ public class Leaderboard
         return self;
     }
 
+    /**
+     * Get all leaderboard top scores.
+     *
+     * @return return the top scores
+     */
     public ArrayList<Integer> getAllScores(){
         Collections.sort(topScores, Collections.reverseOrder());
         return topScores;
     }
 
+    /**
+     * Get the top score.
+     *
+     * @return return top score
+     */
     public int getMaxScore()
     {
         if (!topScores.isEmpty()) {
@@ -27,6 +40,11 @@ public class Leaderboard
         }
     }
 
+    /**
+     * Get the minimum score.
+     *
+     * @return return the min score
+     */
     public int getMinScore()
     {
         if (!topScores.isEmpty()) {
@@ -36,6 +54,11 @@ public class Leaderboard
         }
     }
 
+    /**
+     * Add a score to the leaderboard.
+     *
+     * @param player Current player with new high score
+     */
     public void addScore(Player player)
     {
         int newScore = player.getScore();
@@ -57,6 +80,9 @@ public class Leaderboard
 
     }
 
+    /**
+     * Remove score from leaderboard.
+     */
     public void removeScore()
     {
         if (!topScores.isEmpty()) {

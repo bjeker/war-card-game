@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
+/**
+ * Displays the gameplay along with buttons for actions
+ */
 public class GamePlayView {
     JFrame gameFrame = new JFrame("War: A Card Game");
     JFrame handFrame1 = new JFrame("Player 1 Hand");
@@ -29,6 +32,12 @@ public class GamePlayView {
     private ArrayList<Card> p1Pile = new ArrayList<>();
     private ArrayList<Card> p2Pile = new ArrayList<>();
 
+    /**
+     * Displays the current game and features
+     *
+     * @param opponent the opponent to play against
+     * @param rounds rounds to play to
+     */
     public void display(String opponent, String rounds) {
 
 
@@ -180,6 +189,18 @@ public class GamePlayView {
         gameFrame.setVisible(true);
     }
 
+    /**
+     * <p>
+     *     Play the round itself.
+     * </p>
+     * <p>
+     * Cards are chosen and scores are updated.
+     * Game ending logic is contained here.
+     * </p>
+     *
+     * @param p1Card Card chosen by Player 1
+     * @param p2Card Card chosen by Player 2
+     */
     public void playRound(Card p1Card, Card p2Card) {
         p1Pile.add(p1Card);
         p2Pile.add(p2Card);

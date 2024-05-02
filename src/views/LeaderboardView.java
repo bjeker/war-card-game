@@ -5,9 +5,18 @@ import javax.swing.*;
 import java.awt.*;
 import main.Leaderboard;
 
+/**
+ * Leaderboard display with its contents and sizing.
+ */
 public class LeaderboardView {
     private Leaderboard leaderboard = Leaderboard.get();
 
+    /**
+     * Display the leaderboard.
+     * <p>
+     *     Sets the sizing of the content along with values.
+     * </p>
+     */
     public void display()
     {
 

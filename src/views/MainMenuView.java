@@ -5,12 +5,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Main menu display.
+ * <p>
+ *     Play game and Leaderboard buttons here.
+ * </p>
+ */
 public class MainMenuView {
 
     private JFrame frame;
     private LeaderboardView leaderboardView;
     private GameSetupView gameSetupView;
 
+    /**
+     * Display the main meny with Play Game and Leaderboard buttons.
+     */
     public void displayMainMenu() {
         frame = new JFrame("Main Menu");
         frame.setSize(400, 200);

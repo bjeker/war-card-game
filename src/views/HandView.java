@@ -7,16 +7,29 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Creates and displays the hand.
+ */
 public class HandView extends JPanel {
     private ArrayList<Card> cards;
     private HashMap<Card,Rectangle> cardPositions;
 
+    /**
+     * Set card size and position.
+     *
+     * @param cards cards used in play.
+     */
     public HandView(ArrayList<Card> cards) {
         this.cards = cards;
         setPreferredSize(new Dimension(200, 100)); // Set preferred size for the panel
         cardPositions = new HashMap<>();
     }
 
+    /**
+     * Card sizing
+     *
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -31,6 +44,14 @@ public class HandView extends JPanel {
         }
     }
 
+    /**
+     * Draw each card with their symbol, number, and color.
+     *
+     * @param g graphics to use
+     * @param x x position
+     * @param y y position
+     * @param card card to draw
+     */
     private void drawCard(Graphics g, int x, int y, Card card) {
         g.setColor(Color.WHITE);
         g.fillRoundRect(x, y, 40, 60, 10, 10); // Draw rounded rectangle as card background
@@ -46,6 +67,12 @@ public class HandView extends JPanel {
         cardPositions.put(card, bounds);
     }
 
+    /**
+     * Format face cards according to value.
+     *
+     * @param value value of the current card
+     * @return return the value of the card
+     */
     private String formatCardValue(int value) {
         if (value >= 2 && value <= 10) {
             return String.valueOf(value);
@@ -60,6 +87,12 @@ public class HandView extends JPanel {
         }
     }
 
+    /**
+     * Format the suit symbol of card based on given string suit.
+     *
+     * @param suit string of the card's suit
+     * @return return the suit
+     */
     private String formatCardSuit(String suit) {
         return switch (suit) {
             case "hearts" -> "♥";
@@ -70,6 +103,11 @@ public class HandView extends JPanel {
         };
     }
 
+    /**
+     * Return the card position
+     *
+     * @return return card position
+     */
     public HashMap<Card, Rectangle> getCardPositions() {
         return cardPositions;
     }

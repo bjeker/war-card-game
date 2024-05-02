@@ -32,8 +32,11 @@ public class GamePlayView {
         JFrame handFrame2 = new JFrame("Player 2 Hand");
         gameFrame.setSize(800,400);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        JLabel scoreP1 = new JLabel();
+        JLabel scoreP2 = new JLabel();
         JPanel panel = new JPanel(new FlowLayout());
+        JPanel scoreP1Panel = new JPanel(new FlowLayout());
+        JPanel scoreP2Panel = new JPanel(new FlowLayout());
         JButton playButton = new JButton("Play Again");
         playButton.addActionListener(new ActionListener() {
             @Override
@@ -69,6 +72,10 @@ public class GamePlayView {
         panel.add(playButton);
         panel.add(returnButton);
         panel.add(exitButton);
+        scoreP1Panel.add(scoreP1);
+        scoreP2Panel.add(scoreP2);
+        panel.add(scoreP1Panel);
+        panel.add(scoreP2Panel);
         gameFrame.add(panel);
 
         //center game frame above the hand
@@ -130,6 +137,8 @@ public class GamePlayView {
                 handFrame1.repaint();
                 handView2.repaint();
                 handFrame2.repaint();
+                scoreP1.setText(p1.getName() + " score: " + p1.getScore());
+                scoreP2.setText(p2.getName() + " score: " + p2.getScore());
             }
         });
 
@@ -232,6 +241,7 @@ public class GamePlayView {
                 winner = p2.getName() + " is the winner!";
                 leaderboard.addScore(p2);
             }
+
             String message = scores + "\n" + winner;
             JOptionPane.showMessageDialog(null, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
         }

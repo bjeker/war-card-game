@@ -258,10 +258,7 @@ public class GamePlayView {
             handFrame2.dispose();
             MainMenuView mainMenuView = new MainMenuView();
             mainMenuView.displayMainMenu();
-
-
-
-
+            
         }
     }
 

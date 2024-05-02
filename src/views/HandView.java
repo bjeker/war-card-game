@@ -45,6 +45,22 @@ public class HandView extends JPanel {
     }
 
     /**
+     * Displays the back of the card for the computer.
+     *
+     * @param g grphics
+     * @param x x position
+     * @param y y position
+     */
+    private void drawLinesOnBack(Graphics g, int x, int y) {
+        g.setColor(Color.RED);
+        g.fillRect(x, y, 40, 60); // Draw rectangle as card background
+        g.setColor(Color.WHITE);
+        // Draw lines to represent individual cards
+        g.drawLine(x + 5, y + 5, x + 5, y + 55); // Left line
+        g.drawLine(x + 35, y + 5, x + 35, y + 55); // Right line
+    }
+
+    /**
      * Draw each card with their symbol, number, and color.
      *
      * @param g graphics to use

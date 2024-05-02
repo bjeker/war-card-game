@@ -116,7 +116,6 @@ public class GamePlayView {
                 // Ensure the index is within the bounds of the hand
                 if (indexClicked >= 0 && indexClicked < p1.getHand().size()) {
                     cardSelected = p1.getHand().get(indexClicked);
-                    System.out.println("Clicked on card at index " + indexClicked + ": " + cardSelected);
                 }
                 Card p1Card = cardSelected;
                 Card p2Card = p2.getHand().get(0);

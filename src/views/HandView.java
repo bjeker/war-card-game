@@ -13,6 +13,7 @@ import java.util.HashMap;
 public class HandView extends JPanel {
     private ArrayList<Card> cards;
     private HashMap<Card,Rectangle> cardPositions;
+    private boolean showBack;
 
     /**
      * Set card size and position.
@@ -23,6 +24,12 @@ public class HandView extends JPanel {
         this.cards = cards;
         setPreferredSize(new Dimension(200, 100)); // Set preferred size for the panel
         cardPositions = new HashMap<>();
+        showBack = false; // By default, show the card value
+    }
+
+    public void setShowBack(boolean showBack) {
+        this.showBack = showBack;
+        repaint(); // Repaint the hand view with the updated option
     }
 
     /**
@@ -37,10 +44,14 @@ public class HandView extends JPanel {
 
         for (int i = 0; i < 5; i++) {
             if(cards.get(i) != null){
-                Card card = cards.get(i);
-                drawCard(g, 5 + i * cardWidth, 5, card);
+                if (showBack) {
+                    // Draw lines on the back of each card to represent individual cards
+                    drawLinesOnBack(g, 5 + i * cardWidth, 5);
+                } else {
+                    // Draw the card value
+                    drawCard(g, 5 + i * cardWidth, 5, cards.get(i));
+                }
             }
-
         }
     }
 

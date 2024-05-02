@@ -136,6 +136,9 @@ public class GamePlayView {
                 playRound(p1Card, p2Card);
                 handView.repaint();
                 handView2.repaint();
+                // Display the scores for each player
+                scoreP1.setText(p1.getName() + " score: " + p1.getScore());
+                scoreP2.setText(p2.getName() + " score: " + p2.getScore());
             }
         });
 
@@ -258,10 +261,6 @@ public class GamePlayView {
             handFrame2.dispose();
             MainMenuView mainMenuView = new MainMenuView();
             mainMenuView.displayMainMenu();
-
-
-
-
         }
     }
 
